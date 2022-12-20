@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "api": "deno run -A --watch ./api/main.js"
+  }
+}

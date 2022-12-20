@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "slug": "luke-skywalker",
+    "name": "Luke Skywalker",
+    "homeWorld": "Tatooine",
+    "profileURL": "https://static.wikia.nocookie.net/starwars/images/3/3d/LukeSkywalker.png/revision/latest/scale-to-width-down/1000?cb=20201218190434"
+  },
+  {
+    "id": 2,
+    "slug": "leia-organa",
+    "name": "Leia Organa",
+    "homeWorld": "Alderaan",
+    "profileURL": "https://static.wikia.nocookie.net/starwars/images/8/89/Leia_endorpromo02.jpg/revision/latest/scale-to-width-down/1000?cb=20080506155343"
+  },
+  {
+    "id": 3,
+    "slug": "han-solo",
+    "name": "Han Solo",
+    "homeWorld": "Corellia",
+    "profileURL": "https://static.wikia.nocookie.net/starwars/images/e/e2/TFAHanSolo.png/revision/latest/scale-to-width-down/1000?cb=20160208055002"
+  },
+  {
+    "id": 4,
+    "slug": "darth-vader",
+    "name": "Darth Vader",
+    "homeWorld": "Tatooine",
+    "profileURL": "https://avatarfiles.alphacoders.com/170/170303.jpg"
+  }
+]

@@ -1,63 +1,71 @@
 import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+import { collection, getFirestore, addDoc, setDoc, doc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC1hZ9pbmHUJUs75KRIMfuXbTjGe4djXcQ",
+  authDomain: "star-wars-deno.firebaseapp.com",
+  projectId: "star-wars-deno",
+  storageBucket: "star-wars-deno.appspot.com",
+  messagingSenderId: "398434859743",
+  appId: "1:398434859743:web:fb3304e70984a066c6c76a"
+};
+
+const firebaseApp = initializeApp(firebaseConfig, "star-wars-api");
+
+const db = getFirestore(firebaseApp)
 
 const app = new Application();
 
 const router = new Router();
 
-const people = [
-  {
-    id: 1,
-    slug: 'luke-skywalker',
-    name: 'Luke Skywalker',
-    homeWorld: 'Tatooine',
-  },
-  {
-    id: 2,
-    slug: 'leia-organa',
-    name: 'Leia Organa',
-    homeWorld: 'Alderaan',
-  },
-  {
-    id: 3,
-    slug: 'han-solo',
-    name: 'Han Solo',
-    homeWorld: 'Corellia',
-  },
-  {
-    id: 4,
-    slug: 'darth-vader',
-    name: 'Darth Vader',
-    homeWorld: 'Tatooine',
-  }
-]
-
 router
 .get('/', (ctx) => {
   ctx.response.body = 'Hello from our API! 🦕'
 })
-.get('/people', (ctx) => {
-  ctx.response.body = people;
+.get('/people', async (ctx) => {
+  try {
+    const people = await getDocs(collection(db, "people"));
+    const data = people.docs.map((doc) => doc.data());
+    ctx.response.body = data
+  } catch (e) {
+    console.log(e)
+    ctx.response.body = "Something went wrong :("
+  }
 })
-.get('/people/:slug', (ctx) => {
+.get('/people/:slug', async (ctx) => {
   const {slug} = ctx.params;
-  const person = people.find((person) => person.slug === slug);
-  if(person) {
-    ctx.response.body = person;
-  } else {
-    ctx.response.body = 'That person was not found 😭'
+  try {
+    // const person = people.find((person) => person.slug === slug);
+    const peopleRef = collection(db, 'people')
+    const q = query(peopleRef, where("slug", "==", slug));
+
+    const person = await getDocs(q).then((querySnapshot) => {
+      const data = querySnapshot.docs.map((doc) => doc.data());
+      return data[0];
+    })
+    if(person) {
+      ctx.response.body = person;
+    } else {
+      ctx.response.body = 'That person was not found 😭'
+    }
+  } catch (e) {
+    console.log(e)
+    ctx.response.body = "Something went wrong :("
   }
 })
 .post('/people', async (ctx) => {
-  const { id, slug, name, homeWorld } = await ctx.request.body('json').value
+  const { slug, name, homeWorld, profileURL } = await ctx.request.body('json').value
   const person = {
-    id,
-    slug,
     name,
-    homeWorld
+    homeWorld,
+    profileURL,
+    slug,
   }
   if(person) {
-    people.push(person)
-    ctx.response.body = people
+    // await addDoc(collection(db, 'people'), person);
+    await setDoc(doc(db, 'people', slug), person)
+    ctx.response.body = 'Person added to Firebase 🔥'
   } else {
     ctx.response.body = "Person not added 😭"
   }

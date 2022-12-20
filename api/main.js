@@ -1,5 +1,4 @@
 import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
-// import { v4 } from "https://deno.land/std@0.168.0/uuid/mod.ts";
 
 const app = new Application();
 

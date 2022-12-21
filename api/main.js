@@ -3,12 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebas
 import { collection, getFirestore, addDoc, setDoc, doc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC1hZ9pbmHUJUs75KRIMfuXbTjGe4djXcQ",
-  authDomain: "star-wars-deno.firebaseapp.com",
-  projectId: "star-wars-deno",
-  storageBucket: "star-wars-deno.appspot.com",
-  messagingSenderId: "398434859743",
-  appId: "1:398434859743:web:fb3304e70984a066c6c76a"
+  // replace with your own config
 };
 
 const firebaseApp = initializeApp(firebaseConfig, "star-wars-api");

@@ -4,12 +4,7 @@ import { collection, getFirestore, setDoc, doc, query, where, getDocs } from "ht
 import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC1hZ9pbmHUJUs75KRIMfuXbTjGe4djXcQ",
-  authDomain: "star-wars-deno.firebaseapp.com",
-  projectId: "star-wars-deno",
-  storageBucket: "star-wars-deno.appspot.com",
-  messagingSenderId: "398434859743",
-  appId: "1:398434859743:web:fb3304e70984a066c6c76a"
+  // replace with your config
 };
 
 const firebaseApp = initializeApp(firebaseConfig, "star-wars-api");

@@ -1,9 +1,15 @@
 import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-import { collection, getFirestore, addDoc, setDoc, doc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { collection, getFirestore, setDoc, doc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
 
 const firebaseConfig = {
-  // replace with your own config
+  apiKey: "AIzaSyC1hZ9pbmHUJUs75KRIMfuXbTjGe4djXcQ",
+  authDomain: "star-wars-deno.firebaseapp.com",
+  projectId: "star-wars-deno",
+  storageBucket: "star-wars-deno.appspot.com",
+  messagingSenderId: "398434859743",
+  appId: "1:398434859743:web:fb3304e70984a066c6c76a"
 };
 
 const firebaseApp = initializeApp(firebaseConfig, "star-wars-api");
@@ -66,8 +72,13 @@ router
   }
 })
 
+app.use(oakCors({
+  origin: 'http://localhost:5173'
+}))
+
 app.use(router.routes());
 app.use(router.allowedMethods());
+
 
 app.addEventListener('listen', () => {
   console.log('App is running on http://localhost:8000');

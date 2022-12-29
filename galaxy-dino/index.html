@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galaxy Dino</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <main>
+      <img src="/galaxy-dino.svg" height="64px"/>
+      <div class="request-form__container">
+        <form id="get-form">
+          <label for="slug">http://localhost:8000/</label>
+          <input type="text" name="slug" placeholder="people">
+          <button type="submit" class="btn">Submit</button>
+        </form>
+        <p id="status"></p>
+        <pre id="response"></pre>
+      </div>
+    </main>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
